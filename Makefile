@@ -72,6 +72,8 @@ custom-init:
 		-w /tmp/terraform-module \
 		cloudposse/build-harness:slim-latest init
 
+# generate the readme
+
 custom-readme:
 	$(MAKE) download-readme
 	$(MAKE) custom-init
