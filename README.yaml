@@ -100,6 +100,9 @@ introduction: |-
 
   [CellxGene](https://github.com/chanzuckerberg/cellxgene) is *an interactive explorer for single-cell transcriptomics data*.
 
+  Please note that I did not write CellXGene. Cellxgene is developed by the lovely folks over at the Chan Zuckerberg Initiave.
+
+  ![CellxGene](./apps/static/cellxgene.png)
 
 # How to use this module. Should be an easy example to copy and paste.
 usage: |-

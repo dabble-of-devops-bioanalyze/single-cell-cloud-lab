@@ -78,6 +78,10 @@ View, sort, filter and export your ScanPy dataframes.
 
 [CellxGene](https://github.com/chanzuckerberg/cellxgene) is *an interactive explorer for single-cell transcriptomics data*.
 
+Please note that I did not write CellXGene. Cellxgene is developed by the lovely folks over at the Chan Zuckerberg Initiave.
+
+![CellxGene](./apps/static/cellxgene.png)
+
 
 
 
