@@ -124,12 +124,18 @@ Visit `http://localhost:5005` in your browser. The app should be up & running.
 
 ## ✨ Quick Start  - AWS Marketplace
 
-Coming Soon!
+Coming Soon!## Quick Start
+
+The `Makefile` is always the source of truth in any BioAnalyze project.
+
+```
+make compose/restart
+```
 
 
 ## Examples
 
-The examples for using this module are in the `examples` directory.
+
 
 
 

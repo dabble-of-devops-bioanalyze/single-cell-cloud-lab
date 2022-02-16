@@ -146,11 +146,14 @@ usage: |-
 
 # Example usage
 examples: |-
-  The examples for using this module are in the `examples` directory.
 
 # How to get started quickly
-#quickstart: |-
-#  Here's how to get started...
+quickstart: |-
+  The `Makefile` is always the source of truth in any BioAnalyze project.
+
+  ```
+  make compose/restart
+  ```
 
 # Other files to include in this README from the project folder
 # include:
