@@ -1,11 +1,12 @@
 name: Create Release
 
-on:
-  workflow_run:
-    workflows: ["Run Tests"]
-    types: [completed]
-    branches:
-      - main
+on: [push]
+# on:
+#   workflow_run:
+#     workflows: ["Run Tests"]
+#     types: [completed]
+#     branches:
+#       - main
 
 # trying with PR
 jobs:
@@ -18,9 +19,7 @@ jobs:
 
       - name: Run changed-files
         id: changed-docker
-        uses: tj-actions/changed-files@v13.1
-        # with:
-        #   files: "./**"
+        uses: tj-actions/changed-files@v15
 
       - name: Get Changed Files
         id: changed-files
