@@ -1,0 +1,38 @@
+name: cellxgene-gateway
+channels:
+- conda-forge
+dependencies:
+- python=3.7
+- requests
+- psutil
+- black
+- twine
+- isort
+- coverage
+- fsspec
+- s3fs
+- ipython
+- supervisor
+- leidenalg
+- pyarrow
+- numpy
+- jupyter-book
+- pip
+- pip:
+  - colorlog
+  - dash
+  - gunicorn
+  - pre_commit
+  - flask-appbuilder
+  - dash-bootstrap-components
+  - Authlib
+  - cellxgene>=0.15
+  - fab-coreui-theme
+  - gunicorn==20.1.0
+  - scanpy==1.6.1
+  - scikit-learn==0.24.1
+  - scipy==1.6.0
+  - statsmodels==0.12.1
+  - tiledb==0.7.7
+  - dash-bootstrap-components[pandas]
+  - sphinxcontrib.datatemplates

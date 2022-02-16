@@ -1,0 +1,116 @@
+{% extends "baselayout.html" %} {% block content %} {{ super() }}
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="dashboard_graph">
+      <h2>Single Cell DataSets</h2>
+      <p>
+        Choose an single cell dataset from the menu below. Optionally, choose a
+        csv annotation file from cellxgene.
+      </p>
+      <p>
+        When ready, press submit. This will open a new window with your chosen view type. You can select the default CellxGene view, or optionally select an embeddings view. These views display the same datasets, but the scanpy embeddings view gives you the option to download the plots as pngs. </p>
+      <p>Please note that larger datasets may take some time to load.</p>
+
+      <form action="{{url_for('DatasetView.list')}}" method="post">
+        <!-- [ view type ] start -->
+        <div class="card">
+          <div class="card-header">
+            <h3>View Type</h3>
+          </div>
+          <div class="card-block table-border-style">
+            <div class="form-group">
+              <label for="view-type">View Type</label>
+              <p>Select the cellxgene view or the scanpy embeddings view.</p>
+              <select class="form-control" id="view-type" name="view-type">
+                <option value="scanpy-embeddings">Scanpy Embeddings (PCA, UMap, TSNE)</option>
+                <option value="scanpy-dataframes">Scanpy DataFrames</option>
+                <option value="cellxgene">CellxGene</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- [ view type ] end -->
+        <!-- [ dataset-table ] start -->
+        <div class="card">
+          <div class="card-header">
+            <h3>AnnData Datasets</h3>
+          </div>
+          <div class="card-block table-border-style">
+            <table
+              id="dataset_table"
+              class="table table-responsive table-hover"
+            >
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Dataset</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dataset in datasets %}
+                <tr>
+                  <td>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="{{dataset['h5ad']}}"
+                      name="dataset"
+                      value="{{dataset['h5ad']}}"
+                      required
+                    />
+                  </td>
+                  <td>{{dataset['h5ad']}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- [ dataset-table ] end -->
+        <!-- [ csv-table ] start -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Annotation File Datasets</h3>
+          </div>
+          <div class="card-block table-border-style">
+            <table id="csv_table" class="table table-responsive table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>CSVs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for csv in csvs %}
+                <tr>
+                  <td>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="{{csv}}"
+                      name="csv"
+                      value="{{csv}}"
+                    />
+                  </td>
+                  <td>{{csv}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <!-- [ dataset-table ] end -->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block tail_js %} {{ super() }}
+<script>
+  $(document).ready(function () {
+    $("#dataset_table").DataTable({});
+    $("#csv_table").DataTable({});
+  });
+</script>
+{% endblock %}

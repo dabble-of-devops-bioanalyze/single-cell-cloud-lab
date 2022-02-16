@@ -1,0 +1,40 @@
+{% extends "baselayout.html" %}
+{% block content %}
+{{ super() }}
+<div class="col-12">
+<h2>Single Cell Cloud Lab</h2>
+<hr>
+<p>View your data using 3 different interfaces.</p>
+
+<h3>Select your Dataset from S3</h3>
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='select-s3-view-type.png')}}" alt="View Type">
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='select-s3-dataset.png')}}" alt="Select S3 dataset">
+
+<br>
+<br>
+<button type="button" class="btn btn-primary">
+<a href="{{url_for('DatasetView.list')}}">Get Started</a>
+</button>
+
+<h3>CellXGene</h3>
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='cellxgene.png')}}" alt="CellxGene">
+
+<h3>PCA, TSNE, UMAP Scatterplots</h3>
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='sc_pca_scatter.png')}}" alt="SC Scatterplot">
+
+<h3>PCA, TSNE, UMAP Histograms</h3>
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='sc_pca_hist.png')}}" alt="SC Histogram">
+
+<h3>Observations and Variables Data Frames</h3>
+<p>View, filter, sort and download your Scanpy datasets as data frames.</p>
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='observations_table.png')}}" alt="Observations Table">
+<img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='variables_table.png')}}" alt="Variables Table">
+
+<hr>
+<p>The Single Cell Cloud Lab is created by <a href="https://www.dabbleofdevops.com/">Dabble of DevOps</a> as a part of the <a href="https://www.bioanalyze.io">BioAnalyze</a> project.</p>
+<p>BioAnalyze is an open source framework for deploying High Performance Compute infrastructure on AWS for Bioinformatics. It uses an analysis first approach to setup sane defaults for an analysis type, such as Single Cell, CellPainting, Clinical Genomics, etc.</p>
+<p><a href="https://github.com/chanzuckerberg/cellxgene">CellXGene</a> is an interactive explorer for single-cell transcriptomics data by the
+    Chan Zuckerberg Initiative.</p>
+
+</div>
+{% endblock %}

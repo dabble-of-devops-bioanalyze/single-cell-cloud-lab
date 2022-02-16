@@ -1,0 +1,48 @@
+{% extends 'appbuilder/init.html' %}
+{% import 'appbuilder/baselib.html' as baselib %}
+
+{% block head_css %}
+ {{ super() }}
+ <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"
+/>
+{% endblock %}
+
+{% block body %}
+        {% include 'appbuilder/general/confirm.html' %}
+        {% include 'appbuilder/general/alert.html' %}
+
+    {% block navbar %}
+        <header class="top" role="header">
+        {% include 'navbar.html' %}
+        </header>
+    {% endblock %}
+
+    <div class="container">
+      <div class="row">
+          {% block messages %}
+            {% include 'appbuilder/flash.html' %}
+          {% endblock %}
+          {% block content %}
+          {% endblock %}
+      </div>
+    </div>
+
+    {% block footer %}
+        <footer>
+        <div class="img-rounded nav-fixed-bottom">
+            <div class="container">
+                {% include 'appbuilder/footer.html' %}
+            </div>
+        </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
+
+{% block tail_js %}
+{{ super() }}
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+{% endblock %}

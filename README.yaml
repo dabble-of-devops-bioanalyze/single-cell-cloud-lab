@@ -1,0 +1,164 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: BioAnalyze - Single Cell Cloud Lab
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: "APACHE2"
+
+# Copyrights
+copyrights:
+  - name: "Dabble of DevOps, SCorp"
+    url: "https://www.dabbleofdevops.com"
+    year: "2021"
+
+# Canonical GitHub repo
+github_repo: dabble-of-devops-bioanalyze/single-cell-cloud-lab
+
+# Badges to display
+badges:
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/dabble-of-devops-bioanalyze/single-cell-cloud-lab.svg"
+    url: "https://github.com/dabble-of-devops-bioanalyze/single-cell-cloud-lab-module/releases/latest"
+
+# List any related terraform modules that this module may be used with or that this module depends on.
+related:
+  - name: "terraform-aws-eks-autoscaling"
+    description: "Wrapper module for terraform-aws-eks-cluster, terraform-aws-eks-worker, and terraform-aws-eks-node-group"
+    url: "https://github.com/dabble-of-devops-bioanalyze/terraform-aws-eks-autoscaling"
+  - name: "terraform-aws-eks-cluster"
+    url: "https://github.com/cloudposse/terraform-aws-eks-cluster/"
+    description: Base CloudPosse module for AWS EKS Clusters"
+  - name: "terraform-null-label"
+    description: "Terraform module designed to generate consistent names and tags for resources. Use terraform-null-label to implement a strict naming convention."
+    url: "https://github.com/cloudposse/terraform-null-label"
+
+# List any resources helpful for someone to get started. For example, link to the hashicorp documentation or AWS documentation.
+references:
+  - name: "Terraform Standard Module Structure"
+    description: "HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories."
+    url: "https://www.terraform.io/docs/modules/index.html#standard-module-structure"
+  - name: "Terraform Module Requirements"
+    description: "HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy."
+    url: "https://www.terraform.io/docs/registry/modules/publish.html#requirements"
+  - name: "Terraform `batch_compute_environment` Resource"
+    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_compute_environment"
+    description: "Creates a AWS Batch compute environment. Compute environments contain the Amazon ECS container instances that are used to run containerized batch jobs."
+  - name: "Terraform `batch_job_queue` Resource"
+    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue"
+    description: "Provides a Batch Job Queue resource."
+  - name: "Terraform `batch_job_definition"
+    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_definition"
+    description: "Provides a Batch Job Definition resource."
+  - name: "Terraform `random_integer` Resource"
+    description: "The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource."
+    url: "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer"
+  - name: "Terraform Version Pinning"
+    description: "The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration"
+    url: "https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version"
+
+# Short description of this project
+description: |-
+  Open-source **[Cloud Lab](https://www..bioanalyze.io)** for Single Cell Analysis.
+
+
+# Introduction to the project
+introduction: |-
+
+  - Cloud Native - Browse an S3 bucket and view your Single Cell data in [CellxGene](https://github.com/chanzuckerberg/cellxgene).
+  - Authentication enabled through [Flask AppBuilder](https://flask-appbuilder.readthedocs.io/en/latest/security.html) in the standalone version or [ShinyProxy](https://www.shinyproxy.io/documentation/configuration/) in the hosted version.
+  - Open source - Nothing is hidden behind a paywall.
+  - Self hosted and hosted with the AWS Marketplace (Coming Soon!) option.
+  - Download your PCA, TSNE, or UMAP plots for any dataset.
+
+  **Choose your Datasets from S3**
+
+  ![Select S3 Datasets](./apps/static/select-s3-dataset.png)
+
+  **Plot Views**
+
+  Plot your PCA, Umap, and/or TSNE with gene names or other observations.
+
+  ![PCA Histogram](./apps/static/sc_pca_hist.png)
+  ![PCA Scatterplot](./apps/static/sc_pca_scatter.png)
+
+  **DataTable Views**
+
+  View, sort, filter and export your ScanPy dataframes.
+
+  ![Observations](./apps/static/observations_table.png)
+  ![Variables](./apps/static/variables_table.png)
+
+  **CellxGene**
+
+  [CellxGene](https://github.com/chanzuckerberg/cellxgene) is *an interactive explorer for single-cell transcriptomics data*.
+
+
+# How to use this module. Should be an easy example to copy and paste.
+usage: |-
+  ## ✨ Quick Start Self Hosted in `Docker`
+
+  > Get the code
+
+  ```bash
+  git clone https://github.com/dabble-of-devops-bioanalyze/single-cell-cloud-lab
+  cd single-cell-cloud-lab
+  cp .env.sample .env
+  ```
+
+  > Add your env vars
+
+  At a minimum you'll need AWS credentials and the S3 bucket where your scanpy datasets are stored.
+
+  ```
+  SECRET_KEY=S3cr3t_K#Key
+  CELLXGENE_BUCKET="my-s3-bucket"
+  AWS_ACCESS_KEY_ID="1234"
+  AWS_SECRET_ACCESS_KEY="abcd"
+  AWS_DEFAULT_REGION=us-east-1
+  SYNC_ENABLED=True
+  # View without authentication
+  PUBLIC=True
+  ```
+
+  If you have the `PUBLIC=True` in your env file you won't need to configure any authentication.
+
+  To configure authentication open the `config.py` and make any necessary changes.
+
+  > Start the app in Docker
+
+  ```bash
+  docker-compose up --build
+  ```
+
+  Visit `http://localhost:5005` in your browser. The app should be up & running.
+
+  ## ✨ Quick Start  - AWS Marketplace
+
+  Coming Soon!
+
+
+# Example usage
+examples: |-
+  The examples for using this module are in the `examples` directory.
+
+# How to get started quickly
+#quickstart: |-
+#  Here's how to get started...
+
+# Other files to include in this README from the project folder
+# include:
+#   - "docs/targets.md"
+#   - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Jillian Rowe"
+    github: "jerowe"
