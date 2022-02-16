@@ -84,7 +84,6 @@ Please note that I did not write CellXGene. Cellxgene is developed by the lovely
 
 
 
-
 ## ✨ Quick Start Self Hosted in `Docker`
 
 > Get the code
@@ -153,7 +152,7 @@ Like this project? Please give it a ★ on [our GitHub](https://github.com/dabbl
 Check out these related projects.
 
 - [BioAnalyze Help Desk](https://dabbleofdevopshelp.zendesk.com/) - Home of the docs and help for the BioAnalyze Project.
-- [BioAnalyze](https://www.bioanalyze.io) - 
+- [BioAnalyze](https://www.bioanalyze.io) -
 - [Dabble of DevOps Consulting](https://www.dabbleofdevops.com) - Want to hire me to design your HPC infrastructure?
 - [terraform-aws-eks-cluster](https://github.com/cloudposse/terraform-aws-eks-cluster/) - Base CloudPosse module for AWS EKS Clusters"
 
@@ -167,7 +166,7 @@ For additional context, refer to some of these links.
 
 - [AnnData](https://anndata.readthedocs.io/) - anndata is a Python package for handling annotated data matrices in memory and on disk, positioned between pandas and xarray. anndata offers a broad range of computationally efficient features including, among others, sparse data support, lazy operations, and a PyTorch interface.
 
-- [COVID-19 Cell Atlas](https://www.covid19cellatlas.org/) - 
+- [COVID-19 Cell Atlas](https://www.covid19cellatlas.org/) -
 
 
 ## Help

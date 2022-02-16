@@ -19,8 +19,8 @@ jobs:
       - name: Run changed-files
         id: changed-docker
         uses: tj-actions/changed-files@v13.1
-        with:
-          files: "./**"
+        # with:
+        #   files: "./**"
 
       - name: Get Changed Files
         id: changed-files
