@@ -83,10 +83,9 @@ ENV FLASK_APP=apps
 
 # DEV
 # If running in dev and don't want to use supervisord or s3 sync just run directly
-CMD ["python", "run.py"]
-# CMD ["gunicorn", "--reload", "--config", "gunicorn-cfg.py", "run:app"]
+# CMD ["python", "run.py"]
 
 # PROD
 # Run the supervisord that spins up the airflow-scheduler and the log
-# CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]
 # CMD ["gunicorn",  "--config", "gunicorn-cfg.py", "run:app"]
+CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]
