@@ -26,37 +26,38 @@ jobs:
         run: |-
           echo "${{ steps.changed-docker.outputs.any_changed }}"
 
-      - name: Show output
+      - name: Get Changed Files - JSON
+        id: changed-files-json
         run: |
           echo '${{ toJSON(steps.changed-docker.outputs) }}'
         shell:
           bash
 
       - uses: actions-ecosystem/action-get-latest-tag@v1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         id: get-latest-tag
 
       - uses: actions-ecosystem/action-bump-semver@v1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         id: bump-semver
         with:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: minor
 
       - uses: actions-ecosystem/action-push-tag@v1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: "${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
 
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         id: changelog
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create a GitHub release
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +67,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
 
       - name: Set Job Environment Variables
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         run: |-
           CALVER="$( date -u '+%Y.%m.%d' )"
           SHA7="${GITHUB_SHA::7}"
@@ -76,11 +77,11 @@ jobs:
           echo "SHA7=${SHA7}" >> $GITHUB_ENV
 
       - uses: docker/setup-buildx-action@v1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
 
       # Dockerhub login
       - uses: docker/login-action@v1
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -102,7 +103,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Build and Push
-        if: steps.changed-docker.outputs.any_changed == 'true'
+        # if: steps.changed-docker.outputs.any_changed == 'true'
         run: |-
           make VERSION=${VERSION} SHA=${SHA7} build
           make VERSION=${VERSION} SHA=${SHA7} push
