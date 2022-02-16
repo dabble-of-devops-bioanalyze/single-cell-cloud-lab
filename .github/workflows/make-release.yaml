@@ -98,5 +98,5 @@ jobs:
       - name: Build and Push
         if: steps.changed-docker.outputs.any_changed == 'true'
         run: |-
-          make VERSION=${VERSION} build
-          make VERSION=${VERSION} push
+          make VERSION=${VERSION} SHA=${SHA7} build
+          make VERSION=${VERSION} SHA=${SHA7} push

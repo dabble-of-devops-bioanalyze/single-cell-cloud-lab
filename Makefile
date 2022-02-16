@@ -2,8 +2,8 @@ SHELL := /bin/bash
 
 DOCKERHUB_USERNAME="dabbleofdevops"
 DOCKERHUB_IMAGE="k8s-single-cell-cloud-lab"
-VERSION?=0.0.01
-
+VERSION?=0.0.1
+SHA?=0.0.1
 
 # List of targets the `readme` target should call before generating the readme
 export README_DEPS ?= docs/targets.md docs/terraform.md
@@ -16,20 +16,24 @@ lint:
 
 build:
 	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)
+	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)
 	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:latest
 	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:latest
 	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)
+	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)
 
 push:
 	$(MAKE) build
 	# dockerhub push
 	docker push dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)
+	docker push dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)
 	docker push dabbleofdevops/k8s-single-cell-cloud-lab:latest
 
 	# aws ecr push
 	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 018835827632.dkr.ecr.us-east-1.amazonaws.com
 	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:latest
 	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)
+	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)
 
 dev:
 	$(MAKE) compose/restart
