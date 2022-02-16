@@ -1,12 +1,12 @@
 name: Create Release
 
-on: [push]
-# on:
-#   workflow_run:
-#     workflows: ["Run Tests"]
-#     types: [completed]
-#     branches:
-#       - main
+# on: [push]
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types: [completed]
+    branches:
+      - main
 
 # trying with PR
 jobs:
