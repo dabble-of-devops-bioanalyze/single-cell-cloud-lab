@@ -61,6 +61,8 @@ compose/shell:
 compose/create-admin:
 	docker-compose exec single-cell bash -c "flask fab create-admin"
 
+# Terraform stuff
+
 download-readme:
 	wget https://raw.githubusercontent.com/dabble-of-devops-bioanalyze/biohub-info/master/docs/README.md.gotmpl -O ./README.md.gotmpl
 

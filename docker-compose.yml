@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   single-cell:
+    # image: "dabbleofdevops/k8s-single-cell-cloud-lab"
     restart: always
     env_file: .env
     volumes:
