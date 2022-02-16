@@ -40,6 +40,9 @@ compose/restart:
 	docker-compose up -d
 	docker-compose logs -f
 
+compose:
+	docker-compose up -d
+
 compose/shell:
 	docker-compose up -d
 	docker-compose exec single-cell bash

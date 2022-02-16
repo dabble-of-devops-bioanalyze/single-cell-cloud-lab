@@ -13,5 +13,5 @@ jobs:
       - name: Run docker build
         run: |
           cp .env.sample .env
-          make compose/restart
+          make compose
           make compose/clean
