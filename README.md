@@ -146,22 +146,22 @@ Like this project? Please give it a ★ on [our GitHub](https://github.com/dabbl
 
 Check out these related projects.
 
-- [terraform-aws-eks-autoscaling](https://github.com/dabble-of-devops-bioanalyze/terraform-aws-eks-autoscaling) - Wrapper module for terraform-aws-eks-cluster, terraform-aws-eks-worker, and terraform-aws-eks-node-group
+- [BioAnalyze Help Desk](https://dabbleofdevopshelp.zendesk.com/) - Home of the docs and help for the BioAnalyze Project.
+- [BioAnalyze](https://www.bioanalyze.io) - 
+- [Dabble of DevOps Consulting](https://www.dabbleofdevops.com) - Want to hire me to design your HPC infrastructure?
 - [terraform-aws-eks-cluster](https://github.com/cloudposse/terraform-aws-eks-cluster/) - Base CloudPosse module for AWS EKS Clusters"
-- [terraform-null-label](https://github.com/cloudposse/terraform-null-label) - Terraform module designed to generate consistent names and tags for resources. Use terraform-null-label to implement a strict naming convention.
 
 
 ## References
 
 For additional context, refer to some of these links.
 
-- [Terraform Standard Module Structure](https://www.terraform.io/docs/modules/index.html#standard-module-structure) - HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories.
-- [Terraform Module Requirements](https://www.terraform.io/docs/registry/modules/publish.html#requirements) - HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy.
-- [Terraform `batch_compute_environment` Resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_compute_environment) - Creates a AWS Batch compute environment. Compute environments contain the Amazon ECS container instances that are used to run containerized batch jobs.
-- [Terraform `batch_job_queue` Resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue) - Provides a Batch Job Queue resource.
-- [Terraform `batch_job_definition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_definition) - Provides a Batch Job Definition resource.
-- [Terraform `random_integer` Resource](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer) - The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource.
-- [Terraform Version Pinning](https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version) - The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration
+- [CellxGene](https://github.com/chanzuckerberg/cellxgene) - An interactive explorer for single-cell transcriptomics data
+- [Scanpy](https://scanpy.readthedocs.io/) - Scanpy is a scalable toolkit for analyzing single-cell gene expression data built jointly with anndata. It includes preprocessing, visualization, clustering, trajectory inference and differential expression testing. The Python-based implementation efficiently deals with datasets of more than one million cells.
+
+- [AnnData](https://anndata.readthedocs.io/) - anndata is a Python package for handling annotated data matrices in memory and on disk, positioned between pandas and xarray. anndata offers a broad range of computationally efficient features including, among others, sparse data support, lazy operations, and a PyTorch interface.
+
+- [COVID-19 Cell Atlas](https://www.covid19cellatlas.org/) - 
 
 
 ## Help

@@ -30,39 +30,35 @@ badges:
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 related:
-  - name: "terraform-aws-eks-autoscaling"
-    description: "Wrapper module for terraform-aws-eks-cluster, terraform-aws-eks-worker, and terraform-aws-eks-node-group"
-    url: "https://github.com/dabble-of-devops-bioanalyze/terraform-aws-eks-autoscaling"
+  - name: "BioAnalyze Help Desk"
+    description: "Home of the docs and help for the BioAnalyze Project."
+    url: "https://dabbleofdevopshelp.zendesk.com/"
+  - name: "BioAnalyze"
+    description: ""
+    url: "https://www.bioanalyze.io"
+  - name: "Dabble of DevOps Consulting"
+    description: "Want to hire me to design your HPC infrastructure?"
+    url: "https://www.dabbleofdevops.com"
   - name: "terraform-aws-eks-cluster"
     url: "https://github.com/cloudposse/terraform-aws-eks-cluster/"
     description: Base CloudPosse module for AWS EKS Clusters"
-  - name: "terraform-null-label"
-    description: "Terraform module designed to generate consistent names and tags for resources. Use terraform-null-label to implement a strict naming convention."
-    url: "https://github.com/cloudposse/terraform-null-label"
 
 # List any resources helpful for someone to get started. For example, link to the hashicorp documentation or AWS documentation.
 references:
-  - name: "Terraform Standard Module Structure"
-    description: "HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories."
-    url: "https://www.terraform.io/docs/modules/index.html#standard-module-structure"
-  - name: "Terraform Module Requirements"
-    description: "HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy."
-    url: "https://www.terraform.io/docs/registry/modules/publish.html#requirements"
-  - name: "Terraform `batch_compute_environment` Resource"
-    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_compute_environment"
-    description: "Creates a AWS Batch compute environment. Compute environments contain the Amazon ECS container instances that are used to run containerized batch jobs."
-  - name: "Terraform `batch_job_queue` Resource"
-    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue"
-    description: "Provides a Batch Job Queue resource."
-  - name: "Terraform `batch_job_definition"
-    url: "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_definition"
-    description: "Provides a Batch Job Definition resource."
-  - name: "Terraform `random_integer` Resource"
-    description: "The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource."
-    url: "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer"
-  - name: "Terraform Version Pinning"
-    description: "The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration"
-    url: "https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version"
+  - name: "CellxGene"
+    description: "An interactive explorer for single-cell transcriptomics data"
+    url: "https://github.com/chanzuckerberg/cellxgene"
+  - name: "Scanpy"
+    description: |
+      Scanpy is a scalable toolkit for analyzing single-cell gene expression data built jointly with anndata. It includes preprocessing, visualization, clustering, trajectory inference and differential expression testing. The Python-based implementation efficiently deals with datasets of more than one million cells.
+    url: "https://scanpy.readthedocs.io/"
+  - name: "AnnData"
+    description: |
+      anndata is a Python package for handling annotated data matrices in memory and on disk, positioned between pandas and xarray. anndata offers a broad range of computationally efficient features including, among others, sparse data support, lazy operations, and a PyTorch interface.
+    url: "https://anndata.readthedocs.io/"
+  - name: "COVID-19 Cell Atlas"
+    description: ""
+    url: "https://www.covid19cellatlas.org/"
 
 # Short description of this project
 description: |-
