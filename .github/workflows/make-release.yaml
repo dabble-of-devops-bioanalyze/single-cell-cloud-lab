@@ -26,6 +26,12 @@ jobs:
         run: |-
           echo "${{ steps.changed-docker.outputs.any_changed }}"
 
+      - name: Show output
+        run: |
+          echo '${{ toJSON(steps.changed-docker.outputs) }}'
+        shell:
+          bash
+
       - uses: actions-ecosystem/action-get-latest-tag@v1
         if: steps.changed-docker.outputs.any_changed == 'true'
         id: get-latest-tag

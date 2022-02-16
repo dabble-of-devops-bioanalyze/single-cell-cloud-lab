@@ -83,7 +83,6 @@ Please note that I did not write CellXGene. Cellxgene is developed by the lovely
 ![CellxGene](./apps/static/cellxgene.png)
 
 
-
 ## ✨ Quick Start Self Hosted in `Docker`
 
 > Get the code
