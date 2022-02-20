@@ -24,7 +24,7 @@ RUN apt-get update -y; apt-get install -y curl git wget unzip supervisor; rm -rf
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-	unzip awscliv2.zip && \
+	unzip -q awscliv2.zip && \
 	./aws/install && \
 	rm -rf awscliv2.zip
 
@@ -83,9 +83,9 @@ ENV FLASK_APP=apps
 
 # DEV
 # If running in dev and don't want to use supervisord or s3 sync just run directly
-# CMD ["python", "run.py"]
+CMD ["python", "run.py"]
 
 # PROD
 # Run the supervisord that spins up the airflow-scheduler and the log
 # CMD ["gunicorn",  "--config", "gunicorn-cfg.py", "run:app"]
-CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]
+# CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]

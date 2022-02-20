@@ -25,10 +25,12 @@ class DatasetView(BaseView):
     @expose("/list/", methods=["GET", "POST"])
     def list(self):
         view_types = {
-            "cellxgene": "/cellxgene",
-            "scanpy-embeddings": "/dash/scanpy/embeddings/",
-            "scanpy-dataframes": "/dash/scanpy/dataframes/",
+            "datasets": url_for('DatasetView.list'),
+            "cellxgene": url_for("cellxgene.serve_cellxgene"),
+            "scanpy-embeddings": url_for('/dash/scanpy/embeddings/'),
+            "scanpy-dataframes": url_for("/dash/scanpy/dataframes/"),
         }
+        current_app.config['view_types'] = view_types
         if request.method == "POST":
             current_app.config['DATASET_LOADED'] = True
             session["dataset"] = None
@@ -67,13 +69,13 @@ class DatasetView(BaseView):
 
 
 appbuilder.add_view_no_menu(DatasetView())
-appbuilder.add_link(
-    "List",
-    href="/datasets/list",
-    icon="fa-list",
-    category="Datasets",
-    category_icon="fa-list",
-)
+# appbuilder.add_link(
+#     "List",
+#     href="/datasets/list",
+#     icon="fa-list",
+#     category="Datasets",
+#     category_icon="fa-list",
+# )
 
 """
     Application wide 404 error handler

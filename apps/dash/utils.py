@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 import dash
 from dash import dash_table as dt
 from dash import Dash, html, dcc
-from flask import url_for
+from flask import url_for, current_app
 
 
 def fig_to_uri(in_fig, close_all=True, **save_args):
@@ -45,6 +45,7 @@ navbar = dbc.NavbarSimple(
     dark=True,
 )
 
+
 navbar_no_dataset = dbc.NavbarSimple(
     children=[
         dbc.NavItem(dbc.NavLink("DataSets", href='/datasets/list', target="_blank")),
@@ -55,7 +56,7 @@ navbar_no_dataset = dbc.NavbarSimple(
         ),
     ],
     brand="BioAnalyze - Single Cell Cloud Lab",
-    brand_href="/",
+    # brand_href="/",
     color="primary",
     dark=True,
 )

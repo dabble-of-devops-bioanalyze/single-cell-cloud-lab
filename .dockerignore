@@ -3,3 +3,10 @@ __pycache__
 *.pyc
 *.pyo
 *.pyd
+data
+.env
+build-harness
+app.db
+.env.sample
+airflow/logs
+supervisord.log

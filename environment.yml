@@ -29,6 +29,7 @@ dependencies:
   - cellxgene>=0.15
   - fab-coreui-theme
   - gunicorn==20.1.0
+  - markupsafe==2.0.1
   - scanpy==1.6.1
   - scikit-learn==0.24.1
   - scipy==1.6.0

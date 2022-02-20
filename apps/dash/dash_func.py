@@ -2,8 +2,9 @@
 
 from datetime import datetime, timedelta
 from flask_login import current_user
-from flask import redirect, current_app, session, has_app_context
+from flask import redirect, current_app, session, has_app_context, url_for
 from dash import dcc, html
+import dash_bootstrap_components as dbc
 import pandas as pd
 import uuid
 import os
@@ -33,6 +34,25 @@ def clean_dir_store():
 
 
 def apply_layout_with_auth(app, layout, appbuilder):
+    def build_navbar():
+        return dbc.NavbarSimple(
+        children=[
+            dcc.Location(id='url', refresh=False),
+            dbc.NavItem(dbc.NavLink("DataSets", href=current_app.config['view_types']['datasets'], target="_blank")),
+            dbc.NavItem(dbc.NavLink("CellXGene", href=url_for('cellxgene.serve_cellxgene'), target="_blank")),
+            dbc.NavItem(dbc.NavLink("Embeddings", href=url_for('/dash/scanpy/embeddings/'), target="_blank")),
+            dbc.NavItem(dbc.NavLink("DataFrames", href=url_for('/dash/scanpy/dataframes/'), target="_blank")),
+            dbc.NavItem(
+                dbc.NavLink(
+                    "Help", href="https://dabbleofdevopshelp.zendesk.com/", target="_blank"
+                )
+            ),
+        ],
+        brand="BioAnalyze - Single Cell Cloud Lab",
+        brand_href=url_for('DatasetView.list'),
+        color="primary",
+        dark=True,
+    )
     def serve_layout():
         app_config = current_app.config
         if not app_config['DATASET_LOADED']:
@@ -40,11 +60,12 @@ def apply_layout_with_auth(app, layout, appbuilder):
         elif app_config['PUBLIC']:
             session_id = str(uuid.uuid4())
             clean_dir_store()
-            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}), layout])
+            navbar = build_navbar()
+            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
         elif current_user and current_user.is_authenticated:
             session_id = str(uuid.uuid4())
             clean_dir_store()
-            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}), layout])
+            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
         loginurl = None
         if has_app_context():
             return dcc.Location(pathname=appbuilder.get_url_for_login, id="")

@@ -108,10 +108,9 @@ dataframes = html.Div(
     ]
 )
 
+
 layout = dbc.Container(
     [
-        loc,
-        navbar,
         header,
         html.Br(),
         # loading message

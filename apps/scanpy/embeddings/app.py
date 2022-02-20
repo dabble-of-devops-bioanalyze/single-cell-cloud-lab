@@ -117,8 +117,8 @@ img_holder = html.Div(
 
 layout = dbc.Container(
     [
-        loc,
-        navbar,
+        # loc,
+        # navbar,
         header,
         html.Br(),
         # loading message
