@@ -359,13 +359,13 @@ def add_dash(server, appbuilder):
         # Output("loading-div", "children"),
         # Output(component_id="controls", component_property="hidden"),
         [
-            Input("url", "pathname"),
+            # Input("url", "pathname"),
             Input("plot_type_dropdown", "value"),
             Input("obs_dropdown", "value"),
             Input("genes_dropdown", "value"),
         ],
     )
-    def update_graph(pathname, plot_type_value, obs_values, genes_values):
+    def update_graph(plot_type_value, obs_values, genes_values):
         # , plot_type, obs, var, genes
         var_values = []
         adata_path = None

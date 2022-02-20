@@ -51,7 +51,7 @@ title = "Scanpy Data Frames"
 basename = "scanpy"
 url_base = "/dash/scanpy/dataframes/"
 
-loc = dcc.Location(id="url", refresh=False)
+# loc = dcc.Location(id="url", refresh=False)
 
 header = html.H4(title, className="p-2 mb-2 text-center")
 

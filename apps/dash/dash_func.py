@@ -38,13 +38,13 @@ def apply_layout_with_auth(app, layout, appbuilder):
         return dbc.NavbarSimple(
         children=[
             dcc.Location(id='url', refresh=False),
-            dbc.NavItem(dbc.NavLink("DataSets", href=current_app.config['view_types']['datasets'], target="_blank")),
-            dbc.NavItem(dbc.NavLink("CellXGene", href=url_for('cellxgene.serve_cellxgene'), target="_blank")),
-            dbc.NavItem(dbc.NavLink("Embeddings", href=url_for('/dash/scanpy/embeddings/'), target="_blank")),
-            dbc.NavItem(dbc.NavLink("DataFrames", href=url_for('/dash/scanpy/dataframes/'), target="_blank")),
+            dbc.NavItem(dbc.NavLink("DataSets", href=current_app.config['view_types']['datasets'], external_link=True, target="_blank")),
+            dbc.NavItem(dbc.NavLink("CellXGene", href=url_for('cellxgene.serve_cellxgene'), external_link=True, target="_blank")),
+            dbc.NavItem(dbc.NavLink("Embeddings", href=url_for('/dash/scanpy/embeddings/'),external_link=True, target="_blank")),
+            dbc.NavItem(dbc.NavLink("DataFrames", href=url_for('/dash/scanpy/dataframes/'),external_link=True, target="_blank")),
             dbc.NavItem(
                 dbc.NavLink(
-                    "Help", href="https://dabbleofdevopshelp.zendesk.com/", target="_blank"
+                    "Help", href="https://dabbleofdevopshelp.zendesk.com/", target="_blank", external_link=True
                 )
             ),
         ],
@@ -60,12 +60,11 @@ def apply_layout_with_auth(app, layout, appbuilder):
         elif app_config['PUBLIC']:
             session_id = str(uuid.uuid4())
             clean_dir_store()
-            navbar = build_navbar()
-            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
+            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dcc.Location(id='url', refresh=False), dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
         elif current_user and current_user.is_authenticated:
             session_id = str(uuid.uuid4())
             clean_dir_store()
-            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
+            return html.Div([html.Div(session_id, id="session_id", style={"display": "none"}),dcc.Location(id='url', refresh=False), dbc.Container([build_navbar(),     ], fluid=True,className="dbc",), layout])
         loginurl = None
         if has_app_context():
             return dcc.Location(pathname=appbuilder.get_url_for_login, id="")

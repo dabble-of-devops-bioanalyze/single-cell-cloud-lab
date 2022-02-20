@@ -40,7 +40,7 @@ navbar = dbc.NavbarSimple(
         ),
     ],
     brand="BioAnalyze - Single Cell Cloud Lab",
-    brand_href="/",
+    brand_href="/datasets/list",
     color="primary",
     dark=True,
 )
@@ -48,15 +48,15 @@ navbar = dbc.NavbarSimple(
 
 navbar_no_dataset = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink("DataSets", href='/datasets/list', target="_blank")),
+        dbc.NavItem(dbc.NavLink("DataSets", href='/datasets/list', external_link=True, target="_blank")),
         dbc.NavItem(
             dbc.NavLink(
-                "Help", href="https://dabbleofdevopshelp.zendesk.com/", target="_blank"
+                "Help", external_link=True, href="https://dabbleofdevopshelp.zendesk.com/", target="_blank"
             )
         ),
     ],
     brand="BioAnalyze - Single Cell Cloud Lab",
-    # brand_href="/",
+    brand_href="/datasets/list",
     color="primary",
     dark=True,
 )
