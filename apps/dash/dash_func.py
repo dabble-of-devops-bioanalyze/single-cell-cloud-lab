@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 from flask_login import current_user
 from flask import redirect, current_app, session, has_app_context, url_for
-from dash import dcc, html
+from dash import dcc, html, Dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 import uuid
@@ -31,6 +31,34 @@ def clean_dir_store():
         mt = file_list.apply(lambda x: datetime.fromtimestamp(os.path.getmtime(x))).astype(str)
         for i in file_list[mt < str(datetime.now() - timedelta(hours=3))]:
             os.remove(i)
+
+
+class CustomDash(Dash):
+    def interpolate_index(self, **kwargs):
+        # Inspect the arguments by printing them
+        from pprint import pprint
+        print(kwargs)
+        pprint(kwargs['scripts'])
+        return '''
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>My App</title>
+            </head>
+            <body>
+                <div id="custom-header">My custom header</div>
+                {app_entry}
+                {config}
+                {scripts}
+                {renderer}
+                <div id="custom-footer">My custom footer</div>
+            </body>
+        </html>
+        '''.format(
+            app_entry=kwargs['app_entry'],
+            config=kwargs['config'],
+            scripts=kwargs['scripts'],
+            renderer=kwargs['renderer'])
 
 
 def apply_layout_with_auth(app, layout, appbuilder):

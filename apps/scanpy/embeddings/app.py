@@ -30,7 +30,7 @@ from functools import lru_cache
 
 # app imports
 from flask import url_for, session, current_app
-from apps.dash.dash_func import apply_layout_with_auth, load_object, save_object
+from apps.dash.dash_func import apply_layout_with_auth, CustomDash, load_object, save_object
 from apps.scanpy import scatterplot_utils
 from apps.dash.utils import fig_to_uri, navbar
 from apps import sc_utils, s3_utils
@@ -50,6 +50,8 @@ varm: 'PCs'
 title = "Scanpy Embedding Plots"
 basename = "scanpy"
 url_base = "/dash/scanpy/embeddings/"
+if os.environ.get('SCRIPT_NAME', False):
+    url_base = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
 
 loc = dcc.Location(id="url", refresh=False)
 
