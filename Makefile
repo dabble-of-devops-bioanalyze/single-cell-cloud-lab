@@ -35,6 +35,12 @@ push:
 	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)
 	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)
 
+	echo "Pushed images"
+	echo "dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)"
+	echo "dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)"
+	echo "018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)"
+	echo "018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)"
+
 dev:
 	$(MAKE) compose/restart
 
