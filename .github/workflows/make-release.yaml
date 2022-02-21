@@ -77,6 +77,9 @@ jobs:
           CALVER="$( date -u '+%Y.%m.%d' )"
           SHA7="${GITHUB_SHA::7}"
           VERSION="${{ steps.bump-semver.outputs.new_version }}"
+          echo "${CALVER}"
+          echo "${SHA7}"
+          echo "${VERSION}"
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "CALVER=${CALVER}" >> $GITHUB_ENV
           echo "SHA7=${SHA7}" >> $GITHUB_ENV
