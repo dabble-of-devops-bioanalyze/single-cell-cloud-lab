@@ -15,8 +15,19 @@ from flask_babel import lazy_gettext as _
 
 # from apps.scanpy.app import add_dash as add_dash_scanpy
 from apps.scanpy.embeddings import app as scanpy_embeding_app
+from pprint import pprint
 
 from . import appbuilder, db
+
+def set_view_types():
+    view_types = {
+        "datasets": url_for('DatasetView.list'),
+        "cellxgene": url_for("cellxgene.serve_cellxgene"),
+        "scanpy-embeddings": url_for(current_app.config['url_mappings']['scanpy-embeddings']),
+        "scanpy-dataframes": url_for(current_app.config['url_mappings']['scanpy-dataframes']),
+    }
+    pprint(view_types)
+    current_app.config['view_types'] = view_types
 
 class DatasetView(BaseView):
     route_base = "/datasets"
@@ -24,13 +35,7 @@ class DatasetView(BaseView):
     @has_access
     @expose("/list/", methods=["GET", "POST"])
     def list(self):
-        view_types = {
-            "datasets": url_for('DatasetView.list'),
-            "cellxgene": url_for("cellxgene.serve_cellxgene"),
-            "scanpy-embeddings": url_for('/dash/scanpy/embeddings/'),
-            "scanpy-dataframes": url_for("/dash/scanpy/dataframes/"),
-        }
-        current_app.config['view_types'] = view_types
+        set_view_types()
         if request.method == "POST":
             current_app.config['DATASET_LOADED'] = True
             session["dataset"] = None
@@ -44,7 +49,7 @@ class DatasetView(BaseView):
             if dataset:
                 dataset = "s3://" + dataset
                 session["adata_path"] = dataset
-                return redirect(view_types[view_type])
+                return redirect(current_app.config['view_types'][view_type])
 
         if session.get('adata_path', False):
             current_app.config['DATASET'] = True

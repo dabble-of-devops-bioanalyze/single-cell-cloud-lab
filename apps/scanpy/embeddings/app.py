@@ -47,15 +47,10 @@ obsm: 'X_pca', 'X_umap'
 varm: 'PCs'
 """
 
-title = "Scanpy Embedding Plots"
-basename = "scanpy"
-url_base = "/dash/scanpy/embeddings/"
-if os.environ.get('SCRIPT_NAME', False):
-    url_base = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
 
 loc = dcc.Location(id="url", refresh=False)
 
-header = html.H4(title, className="p-2 mb-2 text-center")
+header = html.H4("Scanpy Embeddings Plots", className="p-2 mb-2 text-center")
 obs_dropdown = html.Div(
     [
         dbc.Label("Select 0 or more obs from your dataset."),
@@ -337,7 +332,7 @@ def dynamic_plot_maker(scatter_fig, histogram_fig=None, title="", index=0, error
         )
 
 
-def add_dash(server, appbuilder):
+def add_dash(server, appbuilder, title, url_base):
     app = Dash(
         server=server,
         url_base_pathname=url_base,

@@ -68,8 +68,8 @@ def apply_layout_with_auth(app, layout, appbuilder):
             dcc.Location(id='url', refresh=False),
             dbc.NavItem(dbc.NavLink("DataSets", href=current_app.config['view_types']['datasets'], external_link=True, target="_blank")),
             dbc.NavItem(dbc.NavLink("CellXGene", href=url_for('cellxgene.serve_cellxgene'), external_link=True, target="_blank")),
-            dbc.NavItem(dbc.NavLink("Embeddings", href=url_for('/dash/scanpy/embeddings/'),external_link=True, target="_blank")),
-            dbc.NavItem(dbc.NavLink("DataFrames", href=url_for('/dash/scanpy/dataframes/'),external_link=True, target="_blank")),
+            dbc.NavItem(dbc.NavLink("Embeddings", href=url_for(current_app.config['url_mappings']['scanpy-embeddings']),external_link=True, target="_blank")),
+            dbc.NavItem(dbc.NavLink("DataFrames", href=url_for(current_app.config['url_mappings']['scanpy-dataframes']),external_link=True, target="_blank")),
             dbc.NavItem(
                 dbc.NavLink(
                     "Help", href="https://dabbleofdevopshelp.zendesk.com/", target="_blank", external_link=True

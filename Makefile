@@ -68,6 +68,10 @@ compose/shell:
 	docker-compose up -d
 	docker-compose exec single-cell bash
 
+compose/flask-routes:
+	docker-compose up -d
+	docker-compose exec single-cell bash -c "source activate cellxgene-gateway; flask routes"
+
 compose/create-admin:
 	docker-compose exec single-cell bash -c "flask fab create-admin"
 
