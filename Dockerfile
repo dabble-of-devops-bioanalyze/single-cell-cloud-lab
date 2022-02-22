@@ -20,7 +20,9 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /tmp
 
 USER root
-RUN apt-get update -y; apt-get install -y curl git wget unzip supervisor; rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y; \
+    apt-get install -y curl git wget unzip supervisor vim; \
+    rm -rf /var/lib/apt/lists/*
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \

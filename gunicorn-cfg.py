@@ -9,4 +9,4 @@ enable_stdio_inheritance = True
 timeout = 500
 graceful_timeout = 500
 keep_alive = 200
-# reload = True
+reload = True

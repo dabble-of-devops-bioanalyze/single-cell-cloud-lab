@@ -38,7 +38,8 @@ view_type = 'scanpy-embeddings'
 title = "Scanpy Embedding Plots"
 url_base = "/dash/scanpy/embeddings/"
 if os.environ.get('SCRIPT_NAME', False):
-    full_hosting_url = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}/{url_base}"
+    script_name = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}/"
+    full_hosting_url = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
     pathname_params["routes_pathname_prefix"] =  url_base
     pathname_params["requests_pathname_prefix"] = full_hosting_url
     # pathname_params["requests_pathname_prefix"] = os.environ.get('SCRIPT_NAME')
