@@ -33,20 +33,29 @@ appbuilder = AppBuilder(app, db.session, indexview=MyIndexView)
 app.config['view_types'] = {}
 app.config['url_mappings'] = {}
 
+pathname_params = dict()
 view_type = 'scanpy-embeddings'
 title = "Scanpy Embedding Plots"
 url_base = "/dash/scanpy/embeddings/"
 if os.environ.get('SCRIPT_NAME', False):
-    url_base = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
+    full_hosting_url = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
+    pathname_params["routes_pathname_prefix"] =  url_base
+    pathname_params["requests_pathname_prefix"] = full_hosting_url
+    pathname_params['url_base_pathname'] = None
+else:
+    pathname_params['url_base_pathname'] = url_base
+    pathname_params["routes_pathname_prefix"] = None
+    pathname_params["requests_pathname_prefix"] = None
 from apps.scanpy.embeddings.app import add_dash as add_dash_scanpy_embeddings
-app = add_dash_scanpy_embeddings(app, appbuilder, title, url_base)
+app = add_dash_scanpy_embeddings(app, appbuilder, title, **pathname_params)
 app.config['url_mappings'][view_type] = url_base
 
+pathname_params = dict()
 view_type = 'scanpy-dataframes'
 title = "Scanpy Data Frames"
 url_base = "/dash/scanpy/dataframes/"
-if os.environ.get('SCRIPT_NAME', False):
-    url_base = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
+# if os.environ.get('SCRIPT_NAME', False):
+#     url_base = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
 from apps.scanpy.dataframes.app import add_dash as add_dash_scanpy_dataframes
 app = add_dash_scanpy_dataframes(app, appbuilder, title, url_base)
 app.config['url_mappings'][view_type] = url_base

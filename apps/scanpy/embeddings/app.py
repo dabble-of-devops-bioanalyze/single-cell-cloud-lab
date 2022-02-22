@@ -332,10 +332,15 @@ def dynamic_plot_maker(scatter_fig, histogram_fig=None, title="", index=0, error
         )
 
 
-def add_dash(server, appbuilder, title, url_base):
+def add_dash(server, appbuilder, title, kwargs):
+    # pathname_params['url_base_pathname'] = url_base
+    # pathname_params["routes_pathname_prefix"] = None
+    # pathname_params["requests_pathname_prefix"] = None
     app = Dash(
         server=server,
-        url_base_pathname=url_base,
+        url_base_pathname=kwargs['url_base_pathname'],
+        routes_pathname_prefix=kwargs['routes_pathname_prefix'],
+        requests_pathname_prefix=kwargs['requests_pathname_prefix'],
         title=title,
         assets_folder=assets_folder,
         external_stylesheets=[dbc.themes.FLATLY],
