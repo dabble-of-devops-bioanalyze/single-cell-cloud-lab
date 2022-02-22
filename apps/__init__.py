@@ -40,7 +40,8 @@ url_base = "/dash/scanpy/embeddings/"
 if os.environ.get('SCRIPT_NAME', False):
     full_hosting_url = f"{os.environ.get('SCRIPT_NAME').rstrip('/')}{url_base}"
     pathname_params["routes_pathname_prefix"] =  url_base
-    pathname_params["requests_pathname_prefix"] = full_hosting_url
+    # pathname_params["requests_pathname_prefix"] = full_hosting_url
+    pathname_params["requests_pathname_prefix"] = os.environ.get('SCRIPT_NAME')
     pathname_params['url_base_pathname'] = None
 else:
     pathname_params['url_base_pathname'] = url_base
