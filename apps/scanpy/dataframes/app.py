@@ -210,12 +210,14 @@ def dynamic_message(adata_path=None, adata_found=True):
         )
 
 
-def add_dash(server, appbuilder, title, url_base):
+def add_dash(server, appbuilder, title, **kwargs):
     app = Dash(
         name="dash-scanpy-dataframes",
         title=title,
         server=server,
-        url_base_pathname=url_base,
+        url_base_pathname=kwargs['url_base_pathname'],
+        routes_pathname_prefix=kwargs['routes_pathname_prefix'],
+        requests_pathname_prefix=kwargs['requests_pathname_prefix'],
         assets_folder=assets_folder,
         external_stylesheets=[dbc.themes.FLATLY],
         meta_tags=[

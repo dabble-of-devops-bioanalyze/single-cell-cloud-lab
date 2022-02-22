@@ -2,9 +2,16 @@
 {% block content %}
 {{ super() }}
 <div class="col-12">
-<h2>Single Cell Cloud Lab</h2>
+<h2>Single Cell Cloud Lab - Home</h2>
 <hr>
 <p>View your data using 3 different interfaces.</p>
+<br>
+<button type="button" class="btn btn-primary">
+<a style="color: white" href="{{url_for('DatasetView.list')}}">Get Started</a>
+</button>
+<br><br>
+<p>Or keep reading for more information on the view types.</p>
+<hr>
 
 <h3>Select your Dataset from S3</h3>
 <img style="max-width: 100%; height: auto"  src="{{url_for('static', filename='select-s3-view-type.png')}}" alt="View Type">
