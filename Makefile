@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-DOCKERHUB_USERNAME="dabbleofdevops"
-DOCKERHUB_IMAGE="k8s-single-cell-cloud-lab"
+DOCKERHUB_IMAGE="dabbleofdevops/k8s-single-cell-cloud-lab"
+ECR_IMAGE="709825985650.dkr.ecr.us-east-1.amazonaws.com/dabble-of-devops/k8s-single-cell-cloud-lab"
 VERSION?=0.0.1
 SHA?=0.0.1
 
@@ -15,31 +15,31 @@ lint:
 	$(SELF) terraform/install terraform/get-modules terraform/get-plugins terraform/lint terraform/validate
 
 build:
-	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)
-	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)
-	docker build . -t dabbleofdevops/k8s-single-cell-cloud-lab:latest
-	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:latest
-	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)
-	docker build . -t 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)
+	docker build . -t $(DOCKERHUB_IMAGE):$(VERSION)
+	docker build . -t $(DOCKERHUB_IMAGE):$(SHA)
+	docker build . -t $(DOCKERHUB_IMAGE):latest
+	docker build . -t $(ECR_IMAGE):latest
+	docker build . -t $(ECR_IMAGE):$(VERSION)
+	docker build . -t $(ECR_IMAGE):$(SHA)
 
 push:
 	$(MAKE) build
 	# dockerhub push
-	docker push dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)
-	docker push dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)
-	docker push dabbleofdevops/k8s-single-cell-cloud-lab:latest
+	docker push $(DOCKERHUB_IMAGE):$(VERSION)
+	docker push $(DOCKERHUB_IMAGE):$(SHA)
+	docker push $(DOCKERHUB_IMAGE):latest
 
 	# aws ecr push
-	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 018835827632.dkr.ecr.us-east-1.amazonaws.com
-	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:latest
-	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)
-	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)
+	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 709825985650.dkr.ecr.us-east-1.amazonaws.com
+	docker push $(ECR_IMAGE):$(VERSION)
+	docker push $(ECR_IMAGE):$(SHA)
+	docker push $(ECR_IMAGE):latest
 
 	echo "Pushed images"
-	echo "dabbleofdevops/k8s-single-cell-cloud-lab:$(VERSION)"
-	echo "dabbleofdevops/k8s-single-cell-cloud-lab:$(SHA)"
-	echo "018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(VERSION)"
-	echo "018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab:$(SHA)"
+	echo "$(DOCKERHUB_IMAGE):$(VERSION)"
+	echo "$(DOCKERHUB_IMAGE):$(SHA)"
+	echo "$(ECR_IMAGE):$(VERSION)"
+	echo "$(ECR_IMAGE):$(SHA)"
 
 dev:
 	$(MAKE) compose/restart
