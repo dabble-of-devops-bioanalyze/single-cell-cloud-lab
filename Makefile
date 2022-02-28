@@ -15,15 +15,17 @@ lint:
 	$(SELF) terraform/install terraform/get-modules terraform/get-plugins terraform/lint terraform/validate
 
 build:
-	docker build . -t $(DOCKERHUB_IMAGE):$(VERSION)
-	docker build . -t $(DOCKERHUB_IMAGE):$(SHA)
-	docker build . -t $(DOCKERHUB_IMAGE):latest
-	docker build . -t $(ECR_IMAGE):latest
-	docker build . -t $(ECR_IMAGE):$(VERSION)
-	docker build . -t $(ECR_IMAGE):$(SHA)
+	docker build -t k8s-single-cell-cloud-lab .
+
+	docker tag k8s-single-cell-cloud-lab:latest $(ECR_IMAGE):$(VERSION)
+	docker tag k8s-single-cell-cloud-lab:latest $(ECR_IMAGE):$(SHA)
+
+	docker tag k8s-single-cell-cloud-lab:latest $(DOCKERHUB_IMAGE):latest
+	docker tag k8s-single-cell-cloud-lab:latest $(DOCKERHUB_IMAGE):$(VERSION)
+	docker tag k8s-single-cell-cloud-lab:latest $(DOCKERHUB_IMAGE):$(SHA)
 
 push:
-	$(MAKE) build
+	# $(MAKE) build
 	# dockerhub push
 	docker push $(DOCKERHUB_IMAGE):$(VERSION)
 	docker push $(DOCKERHUB_IMAGE):$(SHA)
@@ -33,7 +35,6 @@ push:
 	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 709825985650.dkr.ecr.us-east-1.amazonaws.com
 	docker push $(ECR_IMAGE):$(VERSION)
 	docker push $(ECR_IMAGE):$(SHA)
-	docker push $(ECR_IMAGE):latest
 
 	echo "Pushed images"
 	echo "$(DOCKERHUB_IMAGE):$(VERSION)"
