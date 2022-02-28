@@ -19,6 +19,8 @@ from pprint import pprint
 
 from . import appbuilder, db
 
+S3_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
+
 def set_view_types():
     view_types = {
         "datasets": url_for('DatasetView.list'),
@@ -58,8 +60,8 @@ class DatasetView(BaseView):
 
         s3 = s3fs.S3FileSystem()
         datasets = []
-        h5ads = s3.glob(f"s3://{os.environ.get('CELLXGENE_BUCKET')}/**.h5ad")
-        csvs = s3.glob(f"s3://{os.environ.get('CELLXGENE_BUCKET')}/**.csv")
+        h5ads = s3.glob(f"s3://{S3_BUCKET}/**.h5ad")
+        csvs = s3.glob(f"s3://{S3_BUCKET}/**.csv")
 
         for h5ad in h5ads:
             datasets.append({"h5ad": h5ad})

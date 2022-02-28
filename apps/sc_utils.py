@@ -44,7 +44,7 @@ DEFAULT_CONFIG = AppConfig()
 
 ONE_WEEK = 7 * 24 * 60 * 60
 ANNOTATION_DIR = os.environ.get("ANNOTATION_DIR", os.path.abspath("annotations"))
-bucket = os.environ.get("CELLXGENE_BUCKET", "")
+bucket = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
 
 """
 Cellxgene has many handy loading functions

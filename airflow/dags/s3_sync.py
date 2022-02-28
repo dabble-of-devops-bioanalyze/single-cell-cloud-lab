@@ -24,7 +24,7 @@ default_args = {
 }
 
 
-S3_BUCKET = os.environ.get("CELLXGENE_BUCKET")
+S3_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
 
 ANNOTATION_DIR = os.environ.get("ANNOTATION_DIR", os.path.abspath("annotations"))
 ANNOTATION_DIR = os.path.join(ANNOTATION_DIR, S3_BUCKET)

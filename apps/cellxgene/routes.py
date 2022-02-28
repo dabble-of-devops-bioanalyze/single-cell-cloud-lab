@@ -48,49 +48,13 @@ ONE_WEEK = 7 * 24 * 60 * 60
 
 ANNOTATION_DIR = os.environ.get("ANNOTATION_DIR", os.path.abspath("annotations"))
 bucket = os.environ.get("CELLXGENE_BUCKET", "")
-
+S3_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
 
 @blueprint.route("/")
 def serve_cellxgene():
     logger.info("in serve_cellxgene")
-    # datapath = request.args.get("datapath")
-    # annotations_file = request.args.get("annotations", None)
-    # logger.info(f"Datapath: {datapath}")
     try:
-        # app_config = current_app.app_config
-        # logger.info(app_config)
-
-        # # datapath = "s3://cellxgene-gateway-example-set/pbmc3k.h5ad"
-        # file_path = datapath
-        # clean_file_path = file_path
-
-        # if f"s3://{bucket}/" in clean_file_path:
-        #     clean_file_path = clean_file_path.replace(f"s3://{bucket}/", "")
-        # elif f"s3://{bucket}" in clean_file_path:
-        #     clean_file_path = clean_file_path.replace(f"s3://{bucket}", "")
-
-        # dataset_file = clean_file_path
-        # if len(bucket):
-        #     annotations_dir = os.path.join(
-        #         ANNOTATION_DIR, bucket, f"{dataset_file}_annotations"
-        #     )
-        # else:
-        #     annotations_dir = os.path.join(
-        #         ANNOTATION_DIR, f"{dataset_file}_annotations"
-        #     )
-
-        # # user_generated_data_dir
-
-        # set_default_config(app_config, datapath)
-        # update_datapath(app_config, datapath)
-        # current_app.data_adaptor = app_config.server_config.data_adaptor
-        # dataset_config = app_config.get_dataset_config()
-
-        # scripts = dataset_config.app__scripts
-        # inline_scripts = dataset_config.app__inline_scripts
-        # args = {"SCRIPTS": scripts, "INLINE_SCRIPTS": inline_scripts}
         from apps import sc_utils
-
         adata_found, adata_path, adaptor, dataset = sc_utils.load_adaptor()
 
     except Exception as e:
