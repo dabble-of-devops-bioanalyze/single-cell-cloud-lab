@@ -21,7 +21,7 @@ WORKDIR /tmp
 
 USER root
 RUN apt-get update -y; apt-get upgrade -y; \
-    apt-get install -y curl git wget unzip supervisor vim; \
+    apt-get install -y curl git wget unzip supervisor; \
     rm -rf /var/lib/apt/lists/*
 
 # install aws cli

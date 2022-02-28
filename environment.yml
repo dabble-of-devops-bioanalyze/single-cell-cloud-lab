@@ -1,8 +1,9 @@
 name: cellxgene-gateway
 channels:
+- bioconda
 - conda-forge
 dependencies:
-- python=3.7
+- python=3
 - requests
 - psutil
 - black
@@ -17,6 +18,11 @@ dependencies:
 - pyarrow
 - numpy
 - jupyter-book
+# - scikit-learn=0.24.1
+# - scipy=1.6.0
+# - tiledb=0.7.7
+# keep this as 1.6.1 will need to update some api calls to update version
+- scanpy=1.6.1
 - pip
 - pip:
   - colorlog
@@ -30,10 +36,5 @@ dependencies:
   - fab-coreui-theme
   - gunicorn==20.1.0
   - markupsafe==2.0.1
-  - scanpy==1.6.1
-  - scikit-learn==0.24.1
-  - scipy==1.6.0
-  - statsmodels==0.12.1
-  - tiledb==0.7.7
   - dash-bootstrap-components[pandas]
   - sphinxcontrib.datatemplates
