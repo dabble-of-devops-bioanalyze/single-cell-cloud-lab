@@ -48,21 +48,21 @@ ONE_WEEK = 7 * 24 * 60 * 60
 
 ANNOTATION_DIR = os.environ.get("ANNOTATION_DIR", os.path.abspath("annotations"))
 bucket = os.environ.get("CELLXGENE_BUCKET", "")
-S3_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
+S3_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get("BUCKET")
+
 
 @blueprint.route("/")
 def serve_cellxgene():
     logger.info("in serve_cellxgene")
     try:
         from apps import sc_utils
+
         adata_found, adata_path, adaptor, dataset = sc_utils.load_adaptor()
 
     except Exception as e:
         logger.exception(e)
 
-    return render_template(
-        "cellxgene/index.html", segment="index"
-    )
+    return render_template("cellxgene/index.html", segment="index")
 
 
 @blueprint.route("/dataset")
