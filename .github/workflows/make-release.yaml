@@ -113,7 +113,7 @@ jobs:
       - name: Docker Build
         # if: steps.changed-docker.outputs.any_changed == 'true'
         run: |-
-          make VERSION=${VERSION} SHA=${SHA7} push
+          make VERSION=${VERSION} SHA=${SHA7} build
 
       - name: Docker Push
         # if: steps.changed-docker.outputs.any_changed == 'true'
