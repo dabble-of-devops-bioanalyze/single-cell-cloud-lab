@@ -15,7 +15,7 @@ lint:
 	$(SELF) terraform/install terraform/get-modules terraform/get-plugins terraform/lint terraform/validate
 
 build:
-	docker build -t k8s-single-cell-cloud-lab .
+	docker build -t k8s-single-cell-cloud-lab:latest .
 
 	docker tag k8s-single-cell-cloud-lab:latest $(ECR_IMAGE):$(VERSION)
 	docker tag k8s-single-cell-cloud-lab:latest $(ECR_IMAGE):$(SHA)
