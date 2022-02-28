@@ -20,7 +20,7 @@ from apps import s3_utils
 DEFAULT_CONFIG = AppConfig()
 
 ANNOTATION_DIR = os.environ.get("ANNOTATION_DIR", os.path.abspath("annotations"))
-CELLXGENE_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET')
+CELLXGENE_BUCKET = os.environ.get("CELLXGENE_BUCKET", False) or os.environ.get('BUCKET', False) or ""
 AWS_REGION = os.environ.get('AWS_DEFAULT_REGION', 'us-east-1')
 
 # these all come from the click cli options
