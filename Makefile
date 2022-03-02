@@ -5,6 +5,7 @@ ECR_IMAGE="709825985650.dkr.ecr.us-east-1.amazonaws.com/dabble-of-devops/k8s-sin
 P_ECR_IMAGE="018835827632.dkr.ecr.us-east-1.amazonaws.com/k8s-single-cell-cloud-lab"
 VERSION?=0.0.1
 SHA?=0.0.1
+DT?="1"
 
 # List of targets the `readme` target should call before generating the readme
 export README_DEPS ?= docs/targets.md docs/terraform.md
@@ -104,4 +105,13 @@ custom-readme:
 		-e README_TEMPLATE_FILE=/tmp/terraform-module/README.md.gotmpl \
 		-w /tmp/terraform-module \
 		cloudposse/build-harness:slim-latest readme
+
+# run as
+# DT=$(date '+%Y-%m-%d_%H-%M-%S') make cve/test
+# CVE-2021-3177
+cve/test:
+	docker build -t bitnami-airflow .
+	docker tag bitnami-airflow \
+		018835827632.dkr.ecr.us-east-1.amazonaws.com/bitnami-airflow:2.2.3-debian-10-r57-${DT}
+	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/bitnami-airflow:2.2.3-debian-10-r57-${DT}
 

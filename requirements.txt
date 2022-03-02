@@ -1,0 +1,36 @@
+requests
+psutil
+black
+twine
+isort
+coverage
+fsspec
+s3fs
+ipython
+supervisor
+leidenalg
+pyarrow
+numpy
+jupyter-book
+colorlog
+dash
+dash-bootstrap-components
+dash-bootstrap-components[pandas]
+gunicorn
+pre_commit
+flask-appbuilder
+Authlib
+fab-coreui-theme
+gunicorn==20.1.0
+markupsafe==2.0.1
+sphinxcontrib.datatemplates
+
+# keep this as 1.6.1 will need to update some api calls to update version
+scanpy==1.6.1
+cellxgene>=0.15
+
+# form_type=Basic&
+# results_type=overview&
+# query=2021-3177
+# search_type=all
+# isCpeNameSearch=false

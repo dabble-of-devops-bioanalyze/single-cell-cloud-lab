@@ -1,4 +1,5 @@
-FROM bitnami/airflow:2.2.3
+# FROM bitnami/airflow:2.2.3
+FROM bitnami/airflow:2.2.3-debian-10-r57
 
 ARG CELLXGENE_GATEWAY_VERSION=0.3.8
 ENV CONDA_VERSION=4.10.3-7 \
@@ -11,18 +12,29 @@ ENV CONDA_VERSION=4.10.3-7 \
     CONDA_DIR=/opt/bitnami/conda \
 	DEBIAN_FRONTEND=noninteractive
 
+
 ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/${CONDA_ENV}
 ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /tmp
 
 USER root
-RUN apt-get update -y; apt-get upgrade -y; \
-    apt-get install -y curl git wget unzip supervisor; \
-    rm -rf /var/lib/apt/lists/*
+
+# Supervisor gives us a python security error
+RUN install_packages ca-certificates curl gzip procps tar wget unzip
+# RUN install_packages ca-certificates
+# https://github.com/bitnami/bitnami-docker-aws-cli/blob/master/2/debian-10/Dockerfile#L11
+RUN install_packages ca-certificates curl groff-base gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar wget zlib1g
+
+# https://github.com/bitnami/bitnami-docker-aws-cli/blob/master/2/debian-10/Dockerfile#L16
+# RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aws-cli-2.4.21-0-linux-amd64-debian-10.tar.gz && \
+#     echo "77b596d6ad3b0d17b4ce6f543f3dd7ce18e2ebd64dec1c3bb3f50dcbe9da280f  /tmp/bitnami/pkg/cache/aws-cli-2.4.21-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+#     tar -zxf /tmp/bitnami/pkg/cache/aws-cli-2.4.21-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+#     rm -rf /tmp/bitnami/pkg/cache/aws-cli-2.4.21-0-linux-amd64-debian-10.tar.gz
+
+# ENV PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
@@ -30,8 +42,24 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 	./aws/install && \
 	rm -rf awscliv2.zip
 
+RUN apt-get update -y; apt-get upgrade -y; \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /opt/bitnami/conda && \
+    chown -R 1001:1001 /opt/bitnami
+RUN chmod g+rwX /opt/bitnami
+
 USER 1001
 
+WORKDIR /tmp
+
+# Venv version
+# COPY requirements.txt /tmp
+# RUN python -m venv /opt/bitnami/single-cell-cloud-lab && \
+#     bash -c "source /opt/bitnami/single-cell-cloud-lab/bin/activate" && \
+#     pip install -r /tmp/requirements.txt
+
+# Conda version
 RUN echo "Installing Miniforge..." \
     && URL="https://github.com/conda-forge/miniforge/releases/download/${CONDA_VERSION}/Miniforge3-${CONDA_VERSION}-Linux-x86_64.sh" \
     && wget --quiet ${URL} -O miniconda.sh \
@@ -83,11 +111,11 @@ COPY . ${APP_DIR}
 WORKDIR ${APP_DIR}
 ENV FLASK_APP=apps
 
-# DEV
-# If running in dev and don't want to use supervisord or s3 sync just run directly
-# CMD ["python", "run.py"]
+# # DEV
+# # If running in dev and don't want to use supervisord or s3 sync just run directly
+# # CMD ["python", "run.py"]
 
-# PROD
-# Run the supervisord that spins up the airflow-scheduler and the log
-# CMD ["gunicorn",  "--config", "gunicorn-cfg.py", "run:app"]
-CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]
+# # PROD
+# # Run the supervisord that spins up the airflow-scheduler and the log
+CMD ["gunicorn",  "--config", "gunicorn-cfg.py", "run:app"]
+# CMD ["bash", "-c", "supervisord -c supervisord.conf; tail -f supervisord.log"]
