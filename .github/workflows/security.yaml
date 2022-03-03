@@ -1,0 +1,34 @@
+name: security
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+jobs:
+  build:
+    name: Docker Build Security Scan
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/dabbleofdevops/k8s-single-cell-cloud-lab:${{ github.sha }} .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          # image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          image-ref: 'docker.io/dabbleofdevops/k8s-single-cell-cloud-lab:${{ github.sha }}'
+          format: 'sarif'
+          ignore-unfixed: true
+          output: 'trivy-results.sarif'
+          # exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
