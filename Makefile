@@ -106,12 +106,21 @@ custom-readme:
 		-w /tmp/terraform-module \
 		cloudposse/build-harness:slim-latest readme
 
-# run as
-# DT=$(date '+%Y-%m-%d_%H-%M-%S') make cve/test
-# CVE-2021-3177
-cve/test:
-	docker build -t bitnami-airflow .
-	docker tag bitnami-airflow \
-		018835827632.dkr.ecr.us-east-1.amazonaws.com/bitnami-airflow:2.2.3-debian-10-r57-${DT}
-	docker push 018835827632.dkr.ecr.us-east-1.amazonaws.com/bitnami-airflow:2.2.3-debian-10-r57-${DT}
+trivy:
+	docker build -t k8s-single-cell-cloud-lab:latest .
+
+	# all errors
+	echo "Scanning image for all errors"
+	trivy image \
+		--ignore-unfixed \
+		--severity HIGH,CRITICAL \
+		k8s-single-cell-cloud-lab:latest
+
+	# os specific errors
+	echo "Scanning image for os errors"
+	trivy image \
+		--ignore-unfixed \
+		--vuln-type os \
+		--severity HIGH,CRITICAL \
+		k8s-single-cell-cloud-lab:latest
 

@@ -4,24 +4,32 @@ channels:
 - conda-forge
 dependencies:
 - python=3
-- ipython
+- psutil
+- black
+- twine
+- isort
+- coverage
 - fsspec
 - s3fs
+- ipython
 - leidenalg
 - pyarrow
 - numpy
+- jupyter-book
 # keep this as 1.6.1 will need to update some api calls to update version
 - scanpy=1.6.1
 - pip
 - pip:
   - colorlog
-  - cellxgene>=0.15
-  - flask-appbuilder
-  - Authlib
   - dash
+  - gunicorn
+  - pre_commit
+  - flask-appbuilder
   - dash-bootstrap-components
   - dash-bootstrap-components[pandas]
+  - Authlib
+  - cellxgene>=0.15
   - fab-coreui-theme
   - gunicorn==20.1.0
   - markupsafe==2.0.1
-  # - sphinxcontrib.datatemplates
+  - sphinxcontrib.datatemplates
